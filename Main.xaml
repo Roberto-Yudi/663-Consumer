@@ -1,12 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:utat="clr-namespace:UiPath.Testing.Activities.TestData;assembly=UiPath.Testing.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Members>
-    <x:Property Name="argument1" Type="InArgument(x:String)" />
-  </x:Members>
-  <VisualBasic.Settings>
-    <x:Null />
-  </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1095,896</sap:VirtualizedContainerService.HintSize>
-  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1095,3124" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -115,64 +107,132 @@
       <AssemblyReference>System.Collections.Specialized</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="541,831" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="614,3059" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:Dictionary(x:Int32, x:String)" Default="[new Dictionary(Of Int32, String)]" Name="num_to_status" />
-      <Variable x:TypeArguments="x:Decimal" Name="numeroStatusTitulo" />
       <Variable x:TypeArguments="x:String" Name="statusTitulo" />
-      <Variable x:TypeArguments="x:String" Name="response" />
-      <Variable x:TypeArguments="njl:JObject" Name="responseJson" />
-      <Variable x:TypeArguments="x:Double" Name="cotacaoDolar" />
+      <Variable x:TypeArguments="ui:QueueItem" Name="TransactionItem" />
+      <Variable x:TypeArguments="x:String" Name="currentPathReativacao" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <utat:RandomNumber Decimals="0" DisplayName="Random Number" sap:VirtualizedContainerService.HintSize="479,224" sap2010:WorkflowViewState.IdRef="RandomNumber_2" Max="3" Min="1" Output="[numeroStatusTitulo]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,210" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-      <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[num_to_status(1)]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">Bloqueado</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[num_to_status(2)]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">Pendente</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[num_to_status(3)]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">Cancelado</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-        </scg:List>
-      </ui:MultipleAssign.AssignOperations>
-    </ui:MultipleAssign>
-    <Assign sap:VirtualizedContainerService.HintSize="479,114" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[statusTitulo]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[num_to_status(cint(numeroStatusTitulo))]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Consultacotacaododolar - Invoke Workflow File (Consultacotacaododolar.xaml)" sap:VirtualizedContainerService.HintSize="479,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Consultacotacaododolar.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="mantemPathPastasReativacao - Invoke Workflow File (mantemPathPastasReativacao.xaml)" sap:VirtualizedContainerService.HintSize="552,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="mantemPathPastasReativacao.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_DataPagto" />
-        <OutArgument x:TypeArguments="x:Double" x:Key="out_cotacaoDolar">[cotacaoDolar]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_currentPathReativacao">[currentPathReativacao]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
+    <ui:GetQueueItem ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Transaction Item" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="552,175" sap2010:WorkflowViewState.IdRef="GetQueueItem_1" QueueType="663 Queue" TransactionItem="[TransactionItem]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ChecaStatusTitulo - Invoke Workflow File (ChecaStatusTitulo.xaml)" sap:VirtualizedContainerService.HintSize="552,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="ChecaStatusTitulo.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Titulo">[TransactionItem.SpecificContent("Titulo").ToString]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_statusTitulo">[statusTitulo]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transactio" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="552,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_2" Progress="Status do titulo consultado" TransactionItem="[TransactionItem]" />
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[statusTitulo]" sap:VirtualizedContainerService.HintSize="552,2164" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Sequence x:Key="Pendente" sap:VirtualizedContainerService.HintSize="512,1933" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:Boolean" Name="DarBaixa" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="ChecarPagamento - Invoke Workflow File (ChecarPagamento.xaml)" sap:VirtualizedContainerService.HintSize="450,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ChecarPagamento.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Titulo">[TransactionItem.SpecificContent("Titulo").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_DataPagto">[TransactionItem.SpecificContent("DataPagamento").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_DataVencimento">[TransactionItem.SpecificContent("DataVencimento").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:Double" x:Key="in_ValorTitulo">[Cdbl(TransactionItem.SpecificContent("ValorTitulo"))]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Moeda">[TransactionItem.SpecificContent("Moeda").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:Double" x:Key="in_ValorPago">[Cdbl(TransactionItem.SpecificContent("ValorPago").ToString)]</InArgument>
+            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_DarBaixa">[DarBaixa]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="450,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_3" Progress="Pagamento do Titulo Pendente determinado" TransactionItem="[TransactionItem]" />
+        <If Condition="[DarBaixa]" sap:VirtualizedContainerService.HintSize="450,1417" sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Then>
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,730" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="LiberarPagamento - Invoke Workflow File (LiberarPagamento.xaml)" sap:VirtualizedContainerService.HintSize="354,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="LiberarPagamento.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Titulo">[TransactionItem.SpecificContent("Titulo").ToString]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_7" Progress="Pagamento liberado" TransactionItem="[TransactionItem]" />
+              <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set Transaction Status" ErrorType="Business" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,214" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_2" Status="Successful" TransactionItem="[TransactionItem]">
+                <ui:SetTransactionStatus.Analytics>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                </ui:SetTransactionStatus.Analytics>
+                <ui:SetTransactionStatus.Output>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                </ui:SetTransactionStatus.Output>
+              </ui:SetTransactionStatus>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,526" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_6" Progress="Pagamento não será liberado" TransactionItem="[TransactionItem]" />
+              <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set Transaction Status" ErrorType="Business" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,214" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_3" Status="Successful" TransactionItem="[TransactionItem]">
+                <ui:SetTransactionStatus.Analytics>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                </ui:SetTransactionStatus.Analytics>
+                <ui:SetTransactionStatus.Output>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                </ui:SetTransactionStatus.Output>
+              </ui:SetTransactionStatus>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence x:Key="Bloqueado" sap:VirtualizedContainerService.HintSize="416,1158" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="354,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="AdicionarAviso.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Titulo">[TransactionItem.SpecificContent("Titulo").ToString]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_4" Progress="Aviso adicionado ao Titulo" TransactionItem="[TransactionItem]" />
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="AtualizaPlanilhaReativacao - Invoke Workflow File (AtualizaPlanilhaReativacao.xaml)" sap:VirtualizedContainerService.HintSize="354,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="AtualizaPlanilhaReativacao.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Sucursal">[TransactionItem.SpecificContent("Sucursal").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Ramo">[TransactionItem.SpecificContent("Ramo").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Apolice">[TransactionItem.SpecificContent("Apolice").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Endosso">[TransactionItem.SpecificContent("Endosso").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Titulo">[TransactionItem.SpecificContent("Titulo").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_DataVencimento">[TransactionItem.SpecificContent("DataVencimento").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_DataPagto">[TransactionItem.SpecificContent("DataPagamento").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_ValorTitulo">[TransactionItem.SpecificContent("ValorTitulo").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_ValorPago">[TransactionItem.SpecificContent("ValorPago").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_currentPathReativacao">[currentPathReativacao]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:SetTransactionProgress TimeoutMS="{x:Null}" DisplayName="Set Transaction Progress" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,224" sap2010:WorkflowViewState.IdRef="SetTransactionProgress_5" Progress="Planilha de reativação atualizada" TransactionItem="[TransactionItem]" />
+        <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set Transaction Status" ErrorType="Business" FolderPath="663 Bloqueados" sap:VirtualizedContainerService.HintSize="354,214" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_1" Status="Successful" TransactionItem="[TransactionItem]">
+          <ui:SetTransactionStatus.Analytics>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+          </ui:SetTransactionStatus.Analytics>
+          <ui:SetTransactionStatus.Output>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+          </ui:SetTransactionStatus.Output>
+        </ui:SetTransactionStatus>
+      </Sequence>
+    </Switch>
   </Sequence>
 </Activity>
